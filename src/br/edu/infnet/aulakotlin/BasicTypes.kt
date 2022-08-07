@@ -1,4 +1,4 @@
-package br.pedroso.minikourse
+package br.edu.infnet.aulakotlin
 
 fun main(args: Array<String>) {
     /**

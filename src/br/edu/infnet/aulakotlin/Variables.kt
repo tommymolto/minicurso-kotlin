@@ -1,4 +1,4 @@
-package br.pedroso.minikourse
+package br.edu.infnet.aulakotlin
 
 fun main(args: Array<String>) {
     // Criando uma variável imutável, que não pode ser alterada depois de inicializada
