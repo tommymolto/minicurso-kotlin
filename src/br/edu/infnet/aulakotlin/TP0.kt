@@ -25,18 +25,18 @@ fun main() {
 }
 
 fun exibirMediaDaTurma(){
-    val mediaTurma = boletim.alunos.map { it -> it.calcularMedia() }.average()
+    val mediaTurma = boletim.exibirMediaDaTurma()
     println("A média da turma foi  de $mediaTurma")
 
 }
 fun exibirNotaBaixa(){
 
-    val notaMinima = boletim.alunos.minWith(Comparator.comparingInt {it.provaUm })
-    println("A menor nota foi ${ notaMinima.provaUm} de ${ notaMinima.nome }")
+    val notaMinima = boletim.exibirNotaBaixa()
+    println("A menor nota foi ${ notaMinima.menorNota()} de ${ notaMinima.nome }")
 }
 fun exibirNotaAlta(){
-    val notaMinima = boletim.alunos.maxWith(Comparator.comparingInt {it.provaUm })
-    println("A maior nota foi ${ notaMinima.provaUm} de ${ notaMinima.nome }")
+    val notaMaxima = boletim.exibirNotaAlta()
+    println("A maior nota foi ${ notaMaxima.maiorNota()} de ${ notaMaxima.nome }")
 }
 
 
@@ -59,6 +59,12 @@ data class Aluno(var nome: String, var provaUm: Int, var provaDois: Int){
     fun calcularMedia(): Double {
         return ((provaUm + provaDois).toDouble() / 2)
     }
+    fun menorNota(): Int {
+        return minOf(provaUm, provaDois)
+    }
+    fun maiorNota(): Int {
+        return maxOf(provaUm, provaDois)
+    }
 
 }
 class Boletim(){
@@ -67,6 +73,15 @@ class Boletim(){
     fun adicionaAluno(_aluno: Aluno){
         alunos.add(_aluno)
         println("total de alunos = ${ alunos.size} ")
+    }
+    fun exibirMediaDaTurma(): Double {
+        return boletim.alunos.map { it -> it.calcularMedia() }.average()
+    }
+    fun exibirNotaAlta(): Aluno {
+        return alunos.maxWith(Comparator.comparingInt {it.maiorNota() })
+    }
+    fun exibirNotaBaixa(): Aluno {
+        return alunos.minWith(Comparator.comparingInt {it.menorNota() })
     }
 
 }
